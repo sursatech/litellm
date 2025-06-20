@@ -1,0 +1,17 @@
+model_list:
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY # Securely loads from environment variable
+
+litellm_settings:
+  set_verbose: true
+  # 👇 Switched the callback from langtrace to langfuse
+  callbacks: ["langfuse"]
+
+# 👇 Tells LiteLLM to load these variables from the environment for Langfuse to use
+environment_variables:
+    LANGFUSE_SECRET_KEY: os.environ/LANGFUSE_SECRET_KEY
+    LANGFUSE_PUBLIC_KEY: os.environ/LANGFUSE_PUBLIC_KEY
+    LANGFUSE_HOST: os.environ/LANGFUSE_BASEURL  # LiteLLM expects the base URL under the name LANGFUSE_HOST
+    LANGFUSE_TRACING_ENVIRONMENT: os.environ/LANGFUSE_TRACING_ENVIRONMENT
